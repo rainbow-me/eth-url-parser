@@ -104,6 +104,16 @@ test('build', (t) => {
     t.equals(build({
         scheme: 'ethereum',
         target_address: '0x1234DEADBEEF5678ABCD1234DEADBEEF5678ABCD',
+        function_name: 'foo',
+        parameters: {
+            'param': ['_to', '_value']
+        }
+    }), 'ethereum:0x1234DEADBEEF5678ABCD1234DEADBEEF5678ABCD/foo?param=_to&param=_value',
+    'Can build repeated query keys from array values');
+
+    t.equals(build({
+        scheme: 'ethereum',
+        target_address: '0x1234DEADBEEF5678ABCD1234DEADBEEF5678ABCD',
         parameters: {
             'value': '2014000000000000000',
             'gas': '10',

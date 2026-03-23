@@ -103,7 +103,7 @@ export function build({ prefix = null, target_address, chain_id = null, function
             if (!isFinite(parameters[amountKey])) throw new Error('Invalid amount');
             if (parameters[amountKey] < 0) throw new Error('Invalid amount');
         }
-        query = qs.stringify(parameters);
+        query = qs.stringify(parameters, { arrayFormat: 'repeat' });
     }
 
     const url = `ethereum:${prefix?prefix+'-':''}${target_address}${chain_id ? `@${chain_id}` : ''}${function_name ? `/${function_name}`:''}${query ? '?' + query : ''}`;

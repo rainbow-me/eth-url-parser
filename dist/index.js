@@ -4770,7 +4770,7 @@ function parse$3(uri) {
         var amountKey = obj.function_name === 'transfer' ? 'uint256' : 'value';
 
         if (obj.parameters[amountKey]) {
-            obj.parameters[amountKey] = new BigNumber(obj.parameters[amountKey], 10).toString();
+            obj.parameters[amountKey] = new BigNumber(obj.parameters[amountKey], 10).toFixed();
             if (!isFinite(obj.parameters[amountKey])) throw new Error('Invalid amount');
             if (obj.parameters[amountKey] < 0) throw new Error('Invalid amount');
         }
@@ -4808,7 +4808,7 @@ function build(_ref) {
             if (!isFinite(parameters[amountKey])) throw new Error('Invalid amount');
             if (parameters[amountKey] < 0) throw new Error('Invalid amount');
         }
-        query = lib.stringify(parameters);
+        query = lib.stringify(parameters, { arrayFormat: 'repeat' });
     }
 
     var url = 'ethereum:' + (prefix ? prefix + '-' : '') + target_address + (chain_id ? '@' + chain_id : '') + (function_name ? '/' + function_name : '') + (query ? '?' + query : '');
